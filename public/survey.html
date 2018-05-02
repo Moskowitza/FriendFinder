@@ -1,26 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-            <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <title>FriendFinder</title>
-    </head>
-    <body>
-<h1>Survey Questions</h1>
 
-<div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Select</label>
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation Page</title>
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Chosen, this is a nice add on! -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-center">
+        <span class="fa fa-fire"></span> Survey</h1>
+      <hr>
+      <h2 class="text-center">Take Your Friend Survey</h2>
+      <br>
+      <div class="text-center">
+        <a href="/survey">
+          <button class="btn btn-lg btn-primary">
+            <span class="fa fa-list-alt"></span> Survey</button>
+        </a>
+        <a href="/">
+          <button class="btn btn-lg btn-default">
+            <span class="fa fa-home"></span>
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Survey</h4>
+          </div>
+          <div class="panel-body">
+
+            <form role="form">
+
+              <div class="form-group">
+                <label for="name">Name (required)</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+
+              <div class="form-group">
+                <label for="photo">Photo Link</label>
+                <input type="text" class="form-control" id="photo">
+              </div>
+              <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+              <select class="chosen-select" id="q1" style="display: none;">
+                <option value=""></option>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+              </select>
+              <div class="chosen-container chosen-container-single" style="width: 155px;" title="" id="q1_chosen">
+                <a class="chosen-single chosen-default">
+                  <span>Select an Option</span>
+                  <div>
+                    <b></b>
+                  </div>
+                </a>
+                <div class="chosen-drop">
+                  <div class="chosen-search">
+                    <input type="text" autocomplete="off">
+                  </div>
+                  <ul class="chosen-results"></ul>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary submit">Submit</button>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <a href="/api/friends">API Table Link</a> |
+          <a href="https://github.com/Moskowitza/FriendFinder">GitHub Repo</a>
+        </p>
+      </div>
+    </footer>
+
   </div>
+  <!-- Modal -->
+  <div id="results-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">X</button>
+          <h2 class="modal-title">
+            <strong>Best Match</strong>
+          </h2>
+        </div>
+        <div class="modal-body">
+          <h2 class="modal-title">Best Match</h2>
+        </div>
+        <!-- content goes here -->
+        <h2 id="match-name"></h2>
+        <img id="match-img" src="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</body>
 
-
-
-    </body>
 </html>
+
+<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
+<script type="text/javascript">
+
+    // Chosen CSS
+    var config = {
+      ".chosen-select": {},
+      ".chosen-select-deselect": {
+        allow_single_deselect: true
+      },
+      ".chosen-select-no-single": {
+        disable_search_threshold: 10
+      },
+      ".chosen-select-no-results": {
+        no_results_text: "Oops, nothing found!"
+      },
+      ".chosen-select-width": {
+        width: "95%"
+      }
+    };
+
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+
+
+  // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
+  // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+  // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
+  // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+
+  //form Validation for .form-control, .chosen-select.
+  $(".submit").on("click", function (event) {
+    event.preventDefault();
+    function validateForm() {
+      var isValid = true;
+      $(".form-control").each(function () {
+        if ($(this).val() === "") {
+          isValid = false;
+        }
+      });
+      $(".chosen-select").each(function () {
+        if ($(this).val() === "") {
+          isValid = false;
+        }
+      });
+      return isValid;
+    }
+    //if form is valid...
+    if (validateForm()) {
+      var newFriend = {
+        name: $("#name").val().trim(),
+        photo: $("#photo").val().trim(),
+        scores: [
+          $("#q1").val(),
+          $("#q2").val(),
+          $("#q3").val(),
+          $("#q4").val(),
+          $("#q5").val(),
+          $("#q6").val(),
+          $("#q7").val(),
+          $("#q8").val(),
+          $("#q9").val(),
+          $("#q10").val(),
+        ]
+      };
+
+      // Here we grab the form elements
+
+      console.log(newFriend);
+
+      // This line is the magic. It"s very similar to the standard ajax function we used.
+      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+      // depending on if a tables is available or not.
+
+      $.post("/api/friends", newFriend, function (data) {
+        // pop the match into the modal
+        $("match-name").text(data.name);
+        $("#match-img").attr("src", data.photo);
+        $("#results-modal").modal("toggle");
+      });
+      // If a table is available... tell user they on the waiting list.
+    } else {
+      alert("The Form is not complete");
+    }
+
+    // Clear the form when submitting
+    $("#friend-name").val("");
+    $("#friend-email").val("");
+
+
+  });
+
+</script>
