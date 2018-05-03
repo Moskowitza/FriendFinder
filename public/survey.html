@@ -280,19 +280,15 @@
           ]
         };
 
-        // AJAX post the data to the friends API.
+        // AJAX post the data to the friends API. THIS DOES WORK
         $.post("/api/friends", newFriend, function (data) {
 
           // Grab the result from the AJAX post so that the best match's name and photo are displayed.
           $("#match-name").text(data.name);
           $("#match-img").attr("src", data.photo);
-          for (i = 0; i < friendArray.length; i++) {
-            console.log(friendArray[i].scores)
-          }
+
           // Show the modal with the best match
           $("#results-modal").modal("toggle");
-
-
         });
       } else {
         alert("Please fill out all fields before submitting!");
