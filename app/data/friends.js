@@ -5,48 +5,48 @@ var friendArray = [
         "name": "Ahmed",
         "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
         "scores": [
-            "5",
             "1",
-            "4",
-            "4",
-            "5",
             "1",
             "2",
-            "5",
+            "2",
+            "3",
+            "3",
             "4",
-            "1"
+            "4",
+            "5",
+            "5"
         ],
     },
     {
         "name": "Dr. Teeth",
         "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
         "scores": [
+            "2",
+            "2",
+            "3",
             "4",
-            "2",
+            "4",
             "5",
-            "1",
-            "3",
-            "2",
-            "2",
-            "1",
-            "3",
-            "2"
+            "5",
+            "5",
+            "5",
+            "5"
         ]
     },
     {
         "name": "Sandman",
         "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
         "scores": [
-            "3",
+            "1",
+            "2",
             "3",
             "4",
-            "2",
-            "2",
+            "5",
             "1",
-            "3",
-            "2",
-            "2",
-            "3"
+            "1",
+            "1",
+            "1",
+            "1"
         ]
     },
 ];
@@ -70,28 +70,27 @@ var newFriend = {
 module.exports = friendArray;
 
 // Function to add scores for each array
-var friendScores = [];
+var friendScores = []; //array of score values
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
-// friendArray.forEach(function (friend){
-//  friendScores.push(friendArray.scores.reduce(reducer));
-// });
-for (i = 0; i < friendArray.length; i++) {
-    var numbers = friendArray[i].scores;
-    //push them into a new array
-    friendScores.push(parseInt(numbers.reduce(reducer)))
+
+for(i=0;i<friendArray.length;i++){
+   numbers= friendArray[i].scores.map(x=>parseInt(x))
+//    console.log(numbers);
+   friendScores.push(numbers.reduce(reducer))
 }
 console.log("Array of Friend Scores " + friendScores)
 // calculate USER'S Score
-var userScoreRawArr = newFriend.scores
-console.log(userScoreRawArr)
-// var userScoreNumArr = userScoreRawArr.split(",").map(function (item) {
-//     return parseInt(item)
-// });
-// console.log(userScoreNumbArr);
+// if the NewFriend is pushed into the exisiting friendArray
+// newFriend=friendArray[friendArray.length-1] 
 
+var userScoreRawArr = newFriend.scores.map(x=>parseInt(x)); //parse
+console.log("userScoreRawArr "+userScoreRawArr)
+userScore=userScoreRawArr.reduce(reducer)
+console.log("userScore "+ userScore)
 
-var newFriendScore = newFriend.scores.reduce(reducer);
+//now let's compare userScore to the FriendScores
 
+//here is a function that can help
 function closest(num, arr) {
     var curr = arr[0];
     var diff = Math.abs(num - curr);
@@ -105,8 +104,8 @@ function closest(num, arr) {
     return curr;
 }
 
-console.log(closest(newFriendScore, friendScores));
-matchVal = closest(newFriendScore, friendScores);
+console.log(closest(userScore, friendScores));
+matchVal = closest(userScore, friendScores);
 //use index of to get the position of the friend match
 index = friendScores.indexOf(matchVal);
 matchedName = friendArray[index].name;
