@@ -55,14 +55,14 @@ var newFriend = {
     "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
     "scores": [
         "4",
-        "4",
-        "2",
-        "3",
-        "2",
-        "2",
-        "3",
-        "2",
-        "4",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
         "5"
     ]
 }
