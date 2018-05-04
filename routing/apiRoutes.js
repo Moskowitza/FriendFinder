@@ -45,14 +45,13 @@ module.exports = function(app) {
       res.json(matchedFriend);
   });
 };
-function friendMatcher(){
-  // Function to add scores for each array
+function friendMatcher(){  // Function to add scores for each array
+
   var friendScores = []; //array of score values
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   
   for(i=0;i<friendData.length;i++){
      numbers= friendData[i].scores.map(x=>parseInt(x))
-  //    console.log(numbers);
      friendScores.push(numbers.reduce(reducer))
   }
   console.log("Array of Friend Scores " + friendScores)
@@ -73,8 +72,10 @@ function friendMatcher(){
   //use index of to get the position of the friend match
   index = friendScores.indexOf(matchVal);
   matchedName = friendData[index].name;
+  console.log (matchedName) //BROKEN
   return friendData[index];
   };
+
   function closest(num, arr) {
     var curr = arr[0];
     var diff = Math.abs(num - curr);
