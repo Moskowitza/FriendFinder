@@ -68,7 +68,7 @@ var newFriend = {
 }
 
 module.exports = friendArray;
-
+function friendMatcher(){
 // Function to add scores for each array
 var friendScores = []; //array of score values
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -110,3 +110,4 @@ matchVal = closest(userScore, friendScores);
 index = friendScores.indexOf(matchVal);
 matchedName = friendArray[index].name;
 console.log(matchedName);
+};
