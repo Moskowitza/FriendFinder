@@ -2,8 +2,8 @@
 
 var friendArray = [
     {
-        "name": "Ahmed",
-        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "name": "Albert",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
         "scores": [
             "1",
             "1",
@@ -19,7 +19,7 @@ var friendArray = [
     },
     {
         "name": "Batman",
-        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "photo": "https://upload.wikimedia.org/wikipedia/en/8/87/Batman_DC_Comics.png",
         "scores": [
             "2",
             "2",
@@ -34,8 +34,8 @@ var friendArray = [
         ],
     },
     {
-        "name": "Captain",
-        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "name": "Captain Planet",
+        "photo": "https://upload.wikimedia.org/wikipedia/en/1/1e/Captain_Planet_and_the_Planeteers_title.jpg",
         "scores": [
             "3",
             "3",
@@ -50,8 +50,8 @@ var friendArray = [
         ]
     },
     {
-        "name": "Dogman",
-        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "name": "David Bowie",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Bowie-DD-1974-3.jpg",
         "scores": [
             "4",
             "4",
@@ -66,8 +66,8 @@ var friendArray = [
         ]
     },
     {
-        "name": "Eugene",
-        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "name": "Elongated Man",
+        "photo": "https://upload.wikimedia.org/wikipedia/en/f/fc/Elongated_Man.jpg",
         "scores": [
             "5",
             "5",

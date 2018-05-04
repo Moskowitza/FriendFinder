@@ -88,4 +88,5 @@ function friendMatcher(friendArray){  // Function to add scores for each array
       name=matchedFriend.name;
       photo=matchedFriend.photo;
       console.log("name "+name,"photo link "+photo)
+      return matchedFriend;
 }
