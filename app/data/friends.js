@@ -7,63 +7,80 @@ var friendArray = [
         "scores": [
             "1",
             "1",
-            "2",
-            "2",
-            "3",
-            "3",
-            "4",
-            "4",
-            "5",
-            "5"
-        ],
-    },
-    {
-        "name": "Dr. Teeth",
-        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
-        "scores": [
-            "2",
-            "2",
-            "3",
-            "4",
-            "4",
-            "5",
-            "5",
-            "5",
-            "5",
-            "5"
-        ]
-    },
-    {
-        "name": "Sandman",
-        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
-        "scores": [
             "1",
-            "2",
-            "3",
-            "4",
-            "5",
+            "1",
+            "1",
             "1",
             "1",
             "1",
             "1",
             "1"
-        ]
+        ],
     },
     {
-        "name": "SpongeBob",
+        "name": "Batman",
         "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
         "scores": [
-            "4",
-            "5",
             "2",
-            "5",
             "2",
-            "1",
-            "1",
+            "2",
+            "2",
+            "2",
+            "2",
+            "2",
             "2",
             "2",
             "2"
+        ],
+    },
+    {
+        "name": "Captain",
+        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "scores": [
+            "3",
+            "3",
+            "3",
+            "3",
+            "3",
+            "3",
+            "3",
+            "3",
+            "3",
+            "3"
+        ]
+    },
+    {
+        "name": "Dogman",
+        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "scores": [
+            "4",
+            "4",
+            "4",
+            "4",
+            "4",
+            "4",
+            "4",
+            "4",
+            "4",
+            "4"
+        ]
+    },
+    {
+        "name": "Eugene",
+        "photo": "https://c1-zingpopculture.eb-cdn.com.au/merchandising/images/packshots/79fa32c32cd047679823f9451c8313d4_Original.png",
+        "scores": [
+            "5",
+            "5",
+            "5",
+            "5",
+            "5",
+            "5",
+            "5",
+            "5",
+            "5",
+            "5"
         ]
     }
 ];
 module.exports = friendArray;
+

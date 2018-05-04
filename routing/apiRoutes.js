@@ -8,7 +8,7 @@
 // ===============================================================================
 
 var friendData = require("../app/data/friends");
-
+// var friendMatcher= require("../app/data/matcher");
 // ===============================================================================
 // ROUTING
 // ===============================================================================
@@ -40,51 +40,52 @@ module.exports = function(app) {
       
       friendData.push(req.body);
       
-      //// PUT THE LOGIC HERE
-      var matchedFriend=friendMatcher();
+      //move the response to the front
+      var matchedFriend=friendMatcher(friendData);
       res.json(matchedFriend);
   });
 };
-function friendMatcher(){  // Function to add scores for each array
-
-  var friendScores = []; //array of score values
+function friendMatcher(friendArray){  // Function to add scores for each array
+  userPosition=friendArray.length-1;
+  userArray=friendArray[userPosition].scores;
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  
-  for(i=0;i<friendData.length;i++){
-     numbers= friendData[i].scores.map(x=>parseInt(x))
-     friendScores.push(numbers.reduce(reducer))
-  }
-  console.log("Array of Friend Scores " + friendScores)
-  // calculate USER'S Score
-  // if the NewFriend is pushed into the exisiting friendArray
-  newFriend=friendData[friendData.length-1] 
-  
-  var userScoreRawArr = newFriend.scores.map(x=>parseInt(x)); //parse
-  console.log("userScoreRawArr "+userScoreRawArr)
-  userScore=userScoreRawArr.reduce(reducer)
-  console.log("userScore "+ userScore)
-  
-  //now let's compare userScore to the FriendScores
-  
-  //here is a function that can help
-  // console.log(closest(userScore, friendScores));
-  matchVal = closest(userScore, friendScores);
-  //use index of to get the position of the friend match
-  index = friendScores.indexOf(matchVal);
-  matchedName = friendData[index].name;
-  console.log (matchedName) //BROKEN
-  return friendData[index];
-  };
 
+ var absArray=[]; //an array of comparative low values/ NEED lowest value position
+ for(i=0;i<friendArray.length-1;i++){ //Do not include last item in the array
+      matchArray = friendArray[i].scores;
+      evaluatorArray=[]; //a holder array of the 10 Absolute differences
+      for (j=0;j<matchArray.length;j++){
+          //compare each element in userArray[j] to matchArray[j]
+          var a = matchArray[j]
+          var b = userArray[j]
+          var c = Math.abs(a-b) //the absolute difference
+          evaluatorArray.push(c); //
+      } 
+      console.log("evaluatorArray"+evaluatorArray)
+      absScore=evaluatorArray.reduce(reducer)
+      absArray.push(absScore)
+  }
+  console.log("absArray "+absArray)
+  //use the closest function to get value closest to Zero
   function closest(num, arr) {
-    var curr = arr[0];
-    var diff = Math.abs(num - curr);
-    for (var val = 0; val < arr.length; val++) {
-        var newdiff = Math.abs(num - arr[val]);
-        if (newdiff < diff) {
-            diff = newdiff;
-            curr = arr[val];
-        }
-    }
-    return curr;
+      var curr = arr[0];
+      var diff = Math.abs(num - curr);
+      for (var val = 0; val < arr.length; val++) {
+          var newdiff = Math.abs(num - arr[val]);
+          if (newdiff < diff) {
+              diff = newdiff;
+              curr = arr[val];
+          }
+      }
+      return curr;
+  }
+      lowestMatchVal=closest(0,absArray);
+      indexPos=absArray.indexOf(lowestMatchVal);
+      console.log(indexPos);
+      //you're matching friend is
+      matchedFriend=friendArray[indexPos];
+      console.log("matchedFriend"+matchedFriend)
+      name=matchedFriend.name;
+      photo=matchedFriend.photo;
+      console.log("name "+name,"photo link "+photo)
 }
